@@ -1,5 +1,10 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "../components/ui/card";
 import graduation from "../assets/graduation.jpg";
 import graduation2 from "../assets/graduation2.jpg";
 

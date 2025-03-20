@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { HiMenu, HiX } from "react-icons/hi"; // Using react-icons
-import { scrollToSection } from "@/utils/scroll";
+import { scrollToSection } from "../utils/scroll";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "../components/ui/dropdown-menu";
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);

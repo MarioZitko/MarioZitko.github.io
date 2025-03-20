@@ -1,5 +1,10 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "../components/ui/card";
 import vekomImg from "../assets/projects/vekom.png";
 import securityImg from "../assets/projects/securityTest.png";
 import portfolioImage from "../assets/portfolio.png";

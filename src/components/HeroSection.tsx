@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaFileDownload } from "react-icons/fa";
 import cv from "@/assets/CV.pdf";
-import { scrollToSection } from "@/utils/scroll";
+import { scrollToSection } from "../utils/scroll";
 
 export default function HeroSection() {
 	return (
