@@ -1,9 +1,9 @@
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import backgroundImage from "@/assets/black-background.jpg";
-import Education from "./components/education";
+import Education from "./components/Education";
 
 export default function App() {
 	return (
