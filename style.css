@@ -1,8 +1,0 @@
-.carousel-caption {
-	opacity: 0;
-	transition: 500ms ease-in-out;
-}
-.carousel:hover .carousel-caption {
-	opacity: 1;
-}
-
