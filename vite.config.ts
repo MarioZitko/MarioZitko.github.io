@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: "/MarioZitko.github.io/", // Ensure this matches your GitHub repo name
+	base: "/", // Ensure this matches your GitHub repo name
 	plugins: [react(), tailwindcss()],
 	resolve: {
 		alias: {
