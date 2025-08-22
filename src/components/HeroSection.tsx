@@ -4,8 +4,20 @@ import { SiGithub, SiLinkedin } from "react-icons/si";
 import { FaFileDownload } from "react-icons/fa";
 import cv from "@/assets/cv.pdf";
 import { scrollToSection } from "@/utils/scroll";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { JSX } from "react";
 
-export default function HeroSection() {
+export default function HeroSection(): JSX.Element {
+	const { trackCVDownload, trackSocialClick } = useAnalytics();
+
+	const handleCVDownload = (): void => {
+		trackCVDownload();
+	};
+
+	const handleSocialClick = (platform: string) => (): void => {
+		trackSocialClick(platform);
+	};
+
 	return (
 		<motion.div
 			className="h-screen flex flex-col items-center justify-center text-center px-4"
@@ -27,7 +39,11 @@ export default function HeroSection() {
 					variant="outline"
 					className="gap-2 text-neutral-800 hover:text-black"
 				>
-					<a href={cv} download>
+					<a
+						href={cv}
+						download="Mario-Zitkovic-CV.pdf"
+						onClick={handleCVDownload}
+					>
 						<FaFileDownload className="w-4 h-4" />
 						Download CV
 					</a>
@@ -49,6 +65,7 @@ export default function HeroSection() {
 					target="_blank"
 					rel="noopener noreferrer"
 					className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+					onClick={handleSocialClick("GitHub")}
 				>
 					<SiGithub size={24} />
 					<span>GitHub</span>
@@ -58,6 +75,7 @@ export default function HeroSection() {
 					target="_blank"
 					rel="noopener noreferrer"
 					className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+					onClick={handleSocialClick("LinkedIn")}
 				>
 					<SiLinkedin size={24} />
 					<span>LinkedIn</span>
