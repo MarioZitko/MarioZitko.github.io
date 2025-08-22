@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mariozitko.github.io/sitemap.xml
+
+# Block crawling of assets that don't need indexing
+Disallow: /assets/
+Disallow: /*.pdf$
