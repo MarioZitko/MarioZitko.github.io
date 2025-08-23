@@ -1,5 +1,10 @@
 import { GA_MEASUREMENT_ID, SHOULD_TRACK } from "@/config/analytics";
 
+// Check if gtag is available
+const isGtagReady = (): boolean => {
+	return typeof window !== "undefined" && typeof window.gtag === "function";
+};
+
 // Initialize GA4
 export const initGA = (): void => {
 	if (!SHOULD_TRACK) {
@@ -9,15 +14,20 @@ export const initGA = (): void => {
 		return;
 	}
 
+	if (!isGtagReady()) {
+		console.log("gtag not ready yet");
+		return;
+	}
+
 	window.gtag("config", GA_MEASUREMENT_ID, {
 		page_title: document.title,
 		page_location: window.location.href,
 	});
 };
 
-// Track page views (for SPA routing)
+// Track page views
 export const trackPageView = (path: string, title?: string): void => {
-	if (!SHOULD_TRACK) return;
+	if (!SHOULD_TRACK || !isGtagReady()) return;
 
 	window.gtag("config", GA_MEASUREMENT_ID, {
 		page_path: path,
@@ -25,12 +35,22 @@ export const trackPageView = (path: string, title?: string): void => {
 	});
 };
 
-// Track custom events
+// Track custom events - Fixed TypeScript typing
 export const trackEvent = (
-	action: Gtag.EventNames | string,
-	parameters?: Gtag.ControlParams | Gtag.EventParams | Gtag.CustomParams
+	action: string,
+	parameters?: {
+		event_category?: string;
+		event_label?: string;
+		event_value?: number;
+		file_name?: string;
+		file_extension?: string;
+		project_name?: string;
+		link_type?: string;
+		platform?: string;
+		[key: string]: string | number | boolean | undefined;
+	}
 ): void => {
-	if (!SHOULD_TRACK) return;
+	if (!SHOULD_TRACK || !isGtagReady()) return;
 
 	window.gtag("event", action, parameters);
 };
