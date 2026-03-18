@@ -5,9 +5,10 @@ export default function Contact() {
 	return (
 		<motion.div
 			className="container mx-auto my-16 p-10 text-white backdrop-blur-md bg-black/30 rounded-lg shadow-lg"
-			initial={{ opacity: 0 }}
-			whileInView={{ opacity: 1 }}
-			transition={{ duration: 1 }}
+			initial={{ opacity: 0, y: 20 }}
+			whileInView={{ opacity: 1, y: 0 }}
+			viewport={{ once: true }}
+			transition={{ duration: 0.7 }}
 		>
 			<h2 className="text-3xl font-bold text-center mb-8">Let's Connect</h2>
 			<div className="flex justify-center gap-6">

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import vekomImg from "../assets/projects/vekom.png";
+import uplatkoImg from "../assets/projects/uplatko.png";
+import liftforgeImg from "../assets/projects/liftforge.png";
 import securityImg from "../assets/projects/securityTest.png";
 import portfolioImage from "../assets/portfolio.png";
 import { useAnalytics } from "@/hooks/useAnalytics";
@@ -11,12 +13,43 @@ interface Project {
 	description: string;
 	image: string;
 	github: string;
+	githubApi?: string;
 	demo?: string;
 	technologies: string[];
 	category: string;
+	wip?: boolean;
 }
 
 const projects: Project[] = [
+	{
+		title: "LiftForge",
+		description:
+			"A full-stack workout tracking platform — log sessions, visualise progress with charts, and organise exercises with drag-and-drop. Features JWT auth with Google & Facebook OAuth, a NestJS REST API with Prisma ORM, and a React dashboard powered by Recharts.",
+		image: liftforgeImg,
+		github: "https://github.com/MarioZitko/liftforge-web",
+		githubApi: "https://github.com/MarioZitko/liftforge-api",
+		technologies: [
+			"React",
+			"TypeScript",
+			"NestJS",
+			"Prisma",
+			"Zustand",
+			"Recharts",
+			"OAuth",
+		],
+		category: "Full-Stack Development",
+		wip: true,
+	},
+	{
+		title: "Uplatko",
+		description:
+			"A browser-based tool for Croatian freelancers and small businesses that reads PDF invoices, extracts payment data, and generates HUB3/PDF417 barcodes. Can input AI Api key for more precise processing. All processing runs locally — no data ever leaves your device.",
+		image: uplatkoImg,
+		github: "https://github.com/MarioZitko/uplatko",
+		demo: "https://uplatko.vercel.app",
+		technologies: ["React", "TypeScript", "Tailwind CSS", "PDF.js", "pdf-lib"],
+		category: "Full-Stack Development",
+	},
 	{
 		title: "Portfolio Website",
 		description:
@@ -66,106 +99,149 @@ const projects: Project[] = [
 	},
 ];
 
+const containerVariants = {
+	hidden: {},
+	visible: {
+		transition: { staggerChildren: 0.12 },
+	},
+};
+
+const cardVariants = {
+	hidden: { opacity: 0, y: 28 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
+	},
+};
+
 export default function Projects(): JSX.Element {
 	const { trackProjectClick } = useAnalytics();
 
 	const handleProjectClick = (
 		projectName: string,
-		linkType: "github" | "demo"
+		linkType: "github" | "demo",
 	) => {
 		return (event: React.MouseEvent<HTMLAnchorElement>): void => {
 			event.preventDefault();
 			trackProjectClick(projectName, linkType);
-
-			// Get the URL from the clicked element
-			const target = event.currentTarget;
-			const url = target.href;
-
-			// Open the link after tracking
+			const url = event.currentTarget.href;
 			window.open(url, "_blank", "noopener,noreferrer");
 		};
 	};
 
 	return (
-		<motion.section
-			className="container mx-auto my-24 px-4"
-			initial={{ opacity: 0, y: 20 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.8 }}
+		<section
 			id="projects"
+			className="container mx-auto my-24 px-4 w-full"
 			aria-label="Featured projects section"
 		>
-			<header>
+			<motion.header
+				initial={{ opacity: 0, y: 20 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				viewport={{ once: true }}
+				transition={{ duration: 0.6 }}
+			>
 				<h2 className="text-4xl font-bold text-center mb-12">
 					Featured Projects
 				</h2>
-			</header>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			</motion.header>
+
+			<motion.div
+				className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+				variants={containerVariants}
+				initial="hidden"
+				whileInView="visible"
+				viewport={{ once: true, margin: "-50px" }}
+			>
 				{projects.map((project: Project, index: number) => (
 					<motion.article
 						key={index}
-						whileHover={{ y: -5 }}
-						transition={{ duration: 0.2 }}
+						variants={cardVariants}
+						whileHover={{ y: -6, transition: { duration: 0.2 } }}
 						itemScope
 						itemType="https://schema.org/CreativeWork"
 					>
-						<Card className="overflow-hidden h-full bg-white/5 backdrop-blur-sm border-zinc-800/50 hover:border-zinc-700/50 transition-colors">
-							<div className="relative h-72 w-full">
+						<Card className="overflow-hidden h-full bg-white/5 backdrop-blur-sm border-zinc-800/50 hover:border-indigo-500/30 transition-colors duration-300">
+							<div className="relative h-56 w-full overflow-hidden">
 								<img
 									src={project.image}
 									alt={`Screenshot of ${project.title} project by Mario Žitković`}
-									className="w-full h-full object-cover p-2 rounded-t-md"
+									className="w-full h-full object-cover p-2 rounded-t-md transition-transform duration-500 hover:scale-105"
 									itemProp="image"
 									loading="lazy"
 								/>
+								<div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
+									<span className="text-[10px] px-2 py-0.5 rounded-full bg-black/60 border border-white/10 text-gray-300 backdrop-blur-sm">
+										{project.category}
+									</span>
+									{project.wip && (
+										<span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 backdrop-blur-sm">
+											In Development
+										</span>
+									)}
+								</div>
 							</div>
-							<CardHeader>
-								<CardTitle className="text-xl text-zinc-200" itemProp="name">
+
+							<CardHeader className="pb-2">
+								<CardTitle className="text-lg text-zinc-200" itemProp="name">
 									{project.title}
 								</CardTitle>
 							</CardHeader>
+
 							<CardContent>
-								<p className="text-zinc-400 mb-4" itemProp="description">
+								<p
+									className="text-zinc-400 text-sm mb-4 leading-relaxed"
+									itemProp="description"
+								>
 									{project.description}
 								</p>
 
 								<div className="mb-4">
-									<h4 className="text-sm font-semibold text-zinc-300 mb-2">
-										Technologies:
-									</h4>
-									<div className="flex flex-wrap gap-1">
+									<div className="flex flex-wrap gap-1.5">
 										{project.technologies.map(
 											(tech: string, techIndex: number) => (
 												<span
 													key={techIndex}
-													className="text-xs px-2 py-1 bg-zinc-800/50 rounded text-zinc-300"
+													className="text-xs px-2 py-0.5 bg-indigo-950/50 border border-indigo-500/20 rounded text-indigo-300/80 hover:border-indigo-400/40 hover:text-indigo-200 transition-colors duration-200"
 													itemProp="keywords"
 												>
 													{tech}
 												</span>
-											)
+											),
 										)}
 									</div>
 								</div>
 
-								<div className="flex gap-4">
+								<div className="flex gap-3 flex-wrap">
 									<a
 										href={project.github}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-sm px-4 py-2 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors text-zinc-200"
+										className="text-sm px-4 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors duration-200 text-zinc-200 border border-zinc-700/50 hover:border-zinc-600"
 										onClick={handleProjectClick(project.title, "github")}
 										aria-label={`View ${project.title} source code on GitHub`}
 										itemProp="url"
 									>
-										GitHub
+										{project.githubApi ? "Web" : "GitHub"}
 									</a>
+									{project.githubApi && (
+										<a
+											href={project.githubApi}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-sm px-4 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 transition-colors duration-200 text-zinc-200 border border-zinc-700/50 hover:border-zinc-600"
+											aria-label={`View ${project.title} API source code on GitHub`}
+										>
+											API
+										</a>
+									)}
 									{project.demo && (
 										<a
 											href={project.demo}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="text-sm px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 transition-colors text-zinc-200"
+											className="text-sm px-4 py-1.5 rounded-md bg-indigo-600/80 hover:bg-indigo-500 transition-colors duration-200 text-white border border-indigo-500/30"
 											onClick={handleProjectClick(project.title, "demo")}
 											aria-label={`View live demo of ${project.title}`}
 											itemProp="sameAs"
@@ -178,7 +254,7 @@ export default function Projects(): JSX.Element {
 						</Card>
 					</motion.article>
 				))}
-			</div>
-		</motion.section>
+			</motion.div>
+		</section>
 	);
 }

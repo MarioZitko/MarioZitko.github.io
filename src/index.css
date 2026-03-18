@@ -120,9 +120,149 @@
 	}
 }
 
-.background {
-	background-image: url("/path-to-your-image.jpg");
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
+/* ── Smooth scroll ───────────────────────────────── */
+html {
+	scroll-behavior: smooth;
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 3px;
+}
+
+/* ── Aurora background ───────────────────────────── */
+.aurora-bg {
+	position: fixed;
+	inset: 0;
+	background: #05050c;
+	z-index: 0;
+	overflow: hidden;
+}
+
+/* Subtle dot-grid overlay */
+.aurora-bg::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.04) 1px,
+		transparent 1px
+	);
+	background-size: 40px 40px;
+	pointer-events: none;
+}
+
+.aurora-orb {
+	position: absolute;
+	border-radius: 50%;
+	will-change: transform;
+}
+
+.aurora-orb-1 {
+	width: 700px;
+	height: 700px;
+	top: -200px;
+	left: -150px;
+	background: radial-gradient(
+		circle,
+		rgba(59, 130, 246, 0.18) 0%,
+		transparent 70%
+	);
+	animation: orb1 22s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+	width: 600px;
+	height: 600px;
+	bottom: -150px;
+	right: -100px;
+	background: radial-gradient(
+		circle,
+		rgba(139, 92, 246, 0.14) 0%,
+		transparent 70%
+	);
+	animation: orb2 28s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+	width: 500px;
+	height: 500px;
+	top: 50%;
+	left: 50%;
+	background: radial-gradient(
+		circle,
+		rgba(20, 184, 166, 0.1) 0%,
+		transparent 70%
+	);
+	animation: orb3 20s ease-in-out infinite;
+}
+
+@keyframes orb1 {
+	0%,
+	100% {
+		transform: translate(0px, 0px) scale(1);
+	}
+	50% {
+		transform: translate(130px, 90px) scale(1.15);
+	}
+}
+
+@keyframes orb2 {
+	0%,
+	100% {
+		transform: translate(0px, 0px) scale(1);
+	}
+	50% {
+		transform: translate(-90px, -70px) scale(1.1);
+	}
+}
+
+@keyframes orb3 {
+	0%,
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+	}
+	33% {
+		transform: translate(calc(-50% + 70px), calc(-50% - 50px)) scale(1.12);
+	}
+	66% {
+		transform: translate(calc(-50% - 50px), calc(-50% + 70px)) scale(0.9);
+	}
+}
+
+/* ── Gradient text ───────────────────────────────── */
+.gradient-text {
+	background: linear-gradient(135deg, #ffffff 0%, #c7d9ff 50%, #e0e7ff 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* ── Timeline line ───────────────────────────────── */
+.timeline-line {
+	background: linear-gradient(
+		to bottom,
+		transparent,
+		rgba(99, 102, 241, 0.4),
+		transparent
+	);
+}
+
+/* ── Reduced motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	.aurora-orb {
+		animation: none;
+	}
+	* {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
 }
