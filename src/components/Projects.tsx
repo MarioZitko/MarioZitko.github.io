@@ -22,6 +22,16 @@ interface Project {
 
 const projects: Project[] = [
 	{
+		title: "Uplatko",
+		description:
+			"A browser-based tool for Croatian freelancers and small businesses that reads PDF invoices, extracts payment data, and generates HUB3/PDF417 barcodes. Can input AI Api key for more precise processing. All processing runs locally — no data ever leaves your device.",
+		image: uplatkoImg,
+		github: "https://github.com/MarioZitko/uplatko",
+		demo: "https://uplatko.vercel.app",
+		technologies: ["React", "TypeScript", "Tailwind CSS", "PDF.js", "pdf-lib"],
+		category: "Full-Stack Development",
+	},
+	{
 		title: "LiftForge",
 		description:
 			"A full-stack workout tracking platform — log sessions, visualise progress with charts, and organise exercises with drag-and-drop. Features JWT auth with Google & Facebook OAuth, a NestJS REST API with Prisma ORM, and a React dashboard powered by Recharts.",
@@ -39,16 +49,6 @@ const projects: Project[] = [
 		],
 		category: "Full-Stack Development",
 		wip: true,
-	},
-	{
-		title: "Uplatko",
-		description:
-			"A browser-based tool for Croatian freelancers and small businesses that reads PDF invoices, extracts payment data, and generates HUB3/PDF417 barcodes. Can input AI Api key for more precise processing. All processing runs locally — no data ever leaves your device.",
-		image: uplatkoImg,
-		github: "https://github.com/MarioZitko/uplatko",
-		demo: "https://uplatko.vercel.app",
-		technologies: ["React", "TypeScript", "Tailwind CSS", "PDF.js", "pdf-lib"],
-		category: "Full-Stack Development",
 	},
 	{
 		title: "Portfolio Website",

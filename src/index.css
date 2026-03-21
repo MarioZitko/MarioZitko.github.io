@@ -123,6 +123,13 @@
 /* ── Smooth scroll ───────────────────────────────── */
 html {
 	scroll-behavior: smooth;
+	/* Fills Safari safe-area (bottom bar) with dark colour instead of white */
+	background-color: #050508;
+}
+
+body {
+	/* Extend content into safe areas so no white strip appears on iPhone */
+	padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ── Scrollbar ───────────────────────────────────── */

@@ -1,7 +1,8 @@
 import { useEffect, useState, JSX } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
 import { FaFileDownload } from "react-icons/fa";
 import { ChevronDown } from "lucide-react";
 import cv from "@/assets/cv.pdf";
@@ -60,7 +61,7 @@ export default function HeroSection(): JSX.Element {
 	const { displayed: typedRole, done: typingDone } = useTypingAnimation(
 		"Software Engineer & Tech Lead",
 		900,
-		55
+		55,
 	);
 
 	return (
@@ -108,13 +109,21 @@ export default function HeroSection(): JSX.Element {
 					)}
 				</motion.div>
 
+				{/* Freelance availability badge */}
+				<motion.div variants={itemVariants} className="mb-6">
+					<span className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">
+						<span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+						Open to freelance projects
+					</span>
+				</motion.div>
+
 				{/* Description */}
 				<motion.p
 					variants={itemVariants}
 					className="max-w-xl text-base md:text-lg mb-10 text-gray-400 leading-relaxed"
 				>
-					Passionate about building efficient, scalable solutions. Specialised in
-					full-stack development and leading high-quality engineering teams.
+					Passionate about building efficient, scalable solutions. Specialised
+					in full-stack development and leading high-quality engineering teams.
 				</motion.p>
 
 				{/* CTA Buttons */}
@@ -138,17 +147,14 @@ export default function HeroSection(): JSX.Element {
 						variant="outline"
 						className="gap-2 text-neutral-800 hover:text-black hover:scale-105 transition-transform duration-200"
 					>
-						<a href="#experience" onClick={() => scrollToSection("experience")}>
-							View My Work
+						<a href="#contact" onClick={() => scrollToSection("contact")}>
+							Contact Me
 						</a>
 					</Button>
 				</motion.div>
 
 				{/* Social links */}
-				<motion.div
-					variants={containerVariants}
-					className="flex gap-8"
-				>
+				<motion.div variants={containerVariants} className="flex gap-8">
 					{[
 						{
 							href: "https://github.com/MarioZitko",
@@ -158,7 +164,7 @@ export default function HeroSection(): JSX.Element {
 						},
 						{
 							href: "https://www.linkedin.com/in/mariozitkovic/",
-							icon: <SiLinkedin size={22} />,
+							icon: <FaLinkedinIn size={22} />,
 							label: "LinkedIn",
 							platform: "LinkedIn",
 						},

@@ -1,44 +1,48 @@
-# Mario Zitko's Portfolio Website
+# Mario Žitković — Portfolio
 
-Welcome to my personal portfolio website! This site showcases my projects, skills, and experience.
+Personal portfolio built with React, TypeScript, Tailwind CSS and Framer Motion.
 
-## 🚀 Live Demo
+**Live site:** [mariozitko.github.io](https://mariozitko.github.io)
 
-Check out the live website: [mariozitko.github.io](https://mariozitko.github.io)
+## Tech Stack
 
-## 🛠️ Built With
-
-- React
-- TypeScript
+- React + TypeScript
 - Vite
-- Tailwind CSS
+- Tailwind CSS v4
 - Framer Motion
-- Shadcn/ui
+- shadcn/ui
+- EmailJS (contact form)
 
-## ⚙️ Local Development
-
-1. Clone the repository:
+## Local Development
 
 ```bash
 git clone https://github.com/MarioZitko/MarioZitko.github.io.git
-```
-
-2. Install dependencies:
-
-```bash
+cd MarioZitko.github.io
 npm install
-```
-
-3. Start the development server:
-
-```bash
 npm run dev
 ```
 
-## 🚀 Deployment
+Open `http://localhost:5173`.
 
-The website is automatically deployed to GitHub Pages when changes are pushed to the gh-pages branch.
+To test on a phone on the same network:
 
----
+```bash
+npm run dev -- --host
+```
 
-Thank you for visiting my portfolio!
+## Deploy
+
+The site is deployed to GitHub Pages via the `gh-pages` package.
+
+```bash
+npm run build   # compiles TypeScript and bundles with Vite → dist/
+npm run deploy  # pushes dist/ to the gh-pages branch
+```
+
+GitHub Pages serves the `gh-pages` branch automatically. Changes are live within a minute or two of running `npm run deploy`.
+
+## Contact Form
+
+The contact form uses [EmailJS](https://emailjs.com) — no backend required. The service ID, template ID and public key are hardcoded in `src/components/Contact.tsx` since they are browser-facing credentials (not secrets).
+
+If you fork this repo, replace those three values with your own from the EmailJS dashboard.

@@ -11,6 +11,7 @@ interface Role {
 
 interface ExperienceEntry {
 	company: string;
+	context: string;
 	location: string;
 	totalDuration: string;
 	roles: Role[];
@@ -20,18 +21,19 @@ interface ExperienceEntry {
 const experiences: ExperienceEntry[] = [
 	{
 		company: "KONČAR – Electrical Engineering Institute",
+		context:
+			"R&D institute within the KONČAR Group — one of Croatia's largest industrial conglomerates — developing specialised software for power engineering, high-voltage electrical testing, and energy systems.",
 		location: "Zagreb, Croatia · Hybrid",
-		totalDuration: "1 yr 11 mos (and ongoing)",
+		totalDuration: "2 yrs · Ongoing",
 		roles: [
 			{
 				title: "Software Engineer | Tech Lead",
 				period: "Jan 2026 – Present",
 				type: "Full-time",
 				bullets: [
-					"Managing and delivering features to 6 production enterprise applications across multiple clients — owning the entire lifecycle from architectural planning and client meetings through to IIS deployment",
-					"Directly mentoring and unblocking developers across multiple parallel projects, conducting in-depth code reviews, and enforcing high architectural standards",
-					"Partnering with the Team Lead on feature design, technical roadmaps, and sprint planning to align engineering with business goals",
-					"Owning code quality through merge request reviews and establishing team-wide standards.",
+					"Stepped into a Tech Lead role across multiple parallel projects — directly mentoring and unblocking developers, conducting deep code reviews, and raising the team's architectural standards",
+					"Partnering with the Team Lead on feature design, sprint planning, and technical roadmaps to keep engineering aligned with business and client goals",
+					"Owning the full merge request pipeline: enforcing code quality standards, catching regressions early, and maintaining a clean, well-documented codebase across 6 active projects",
 				],
 			},
 			{
@@ -39,9 +41,10 @@ const experiences: ExperienceEntry[] = [
 				period: "May 2024 – Jan 2026",
 				type: "Full-time",
 				bullets: [
-					"Built complex React components with domain-specific transformer test calculations, used daily by engineers in KONČAR's live testing labs in real production environments",
-					"Engineered automated generation of formal client-facing PDF and Excel test reports featuring custom branding, embedded graphs, and structured measurement data — replacing manual reporting workflows",
-					"Mentored junior developers within a Scrum framework, driving code quality and team velocity across all active projects",
+					"Delivered 6 enterprise applications across multiple clients, owning the complete lifecycle — from architecture discussions and direct client communication to production deployment on IIS",
+					"Engineered complex React components featuring real-time transformer test calculations (load loss, short-circuit, efficiency) used daily by test engineers in KONČAR's live high-voltage testing labs",
+					"Built an automated reporting pipeline generating formal PDF and Excel test reports with custom branding, embedded measurement graphs, and structured data — eliminating previously manual, error-prone workflows and delivering polished results directly to clients",
+					"Mentored junior developers within a Scrum team, improving code quality and sprint velocity across all active projects",
 				],
 			},
 		],
@@ -49,13 +52,16 @@ const experiences: ExperienceEntry[] = [
 			"React.js",
 			"ASP.NET Core",
 			"MSSQL",
-			"Excel reports",
 			"PDF Reports",
+			"Excel Reports",
+			"IIS",
 			"Scrum",
 		],
 	},
 	{
 		company: "gipSoft",
+		context:
+			"Software company specialising in industrial automation and manufacturing execution systems for production facilities across the region.",
 		location: "Zagreb, Croatia",
 		totalDuration: "1 yr 9 mos",
 		roles: [
@@ -64,9 +70,9 @@ const experiences: ExperienceEntry[] = [
 				period: "Sep 2022 – May 2024",
 				type: "Full-time",
 				bullets: [
-					"Co-led the migration from .NET Framework to .NET Core of a large-scale industrial MES — a system integrated with every machine across a manufacturing plant, managing real-time production data, scales, and hardware control (valve open/close) via SOAP/WCF protocols",
-					"Executed the .NET Framework → .NET Core migration including an Entity Framework 4.8 → EF Core upgrade, eliminating legacy debt while maintaining system stability",
-					"Ported desktop interfaces from WPF to .NET MAUI, extending the application to modern cross-platform targets",
+					"Co-led the porting of a large-scale industrial MES from .NET Framework to .NET Core — a mission-critical system integrated with every machine on a manufacturing plant floor, tracking real-time production data, managing scales, and controlling hardware (valves, actuators) via SOAP/WCF protocols",
+					"Executed the full Entity Framework 4.8 → EF Core migration: rewrote data access layers, resolved breaking API changes, and ensured zero regressions across a complex, live industrial system",
+					"Ported the desktop UI layer from WPF to .NET MAUI, modernising the application and extending it to cross-platform targets while preserving all existing functionality",
 				],
 			},
 		],
@@ -81,6 +87,7 @@ const experiences: ExperienceEntry[] = [
 	},
 	{
 		company: "HGSPOT",
+		context: "Consumer electronics and IT retail chain, held alongside full-time university studies.",
 		location: "Zagreb, Croatia",
 		totalDuration: "2 yrs 4 mos",
 		roles: [
@@ -89,7 +96,7 @@ const experiences: ExperienceEntry[] = [
 				period: "Jun 2020 – Sep 2022",
 				type: "Part-time",
 				description:
-					"Customer support role held alongside university studies. Built strong communication, problem-solving under pressure, and client-handling skills.",
+					"Handled customer support and technical queries in a high-volume environment. Developed strong communication, prioritisation under pressure, and client-handling skills that carry directly into client-facing engineering work today.",
 			},
 		],
 		technologies: ["Communication", "Customer Support", "Teamwork"],
@@ -166,6 +173,7 @@ export default function Experience(): JSX.Element {
 									</span>
 								</div>
 								<p className="text-sm text-gray-500 mt-0.5">{entry.location}</p>
+							<p className="text-sm text-gray-500 mt-2 leading-relaxed">{entry.context}</p>
 							</div>
 
 							{/* Roles */}
