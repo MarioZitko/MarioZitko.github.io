@@ -129,7 +129,7 @@ html {
 
 body {
 	/* Override the white --background CSS variable — Safari reads body bg for its chrome colour */
-	background-color: #050508 !important;
+	background-color: #0a0a12 !important;
 	padding-bottom: env(safe-area-inset-bottom);
 }
 
