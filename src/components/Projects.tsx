@@ -27,7 +27,7 @@ const projects: Project[] = [
 			"A browser-based tool for Croatian freelancers and small businesses that reads PDF invoices, extracts payment data, and generates HUB3/PDF417 barcodes. Can input AI Api key for more precise processing. All processing runs locally — no data ever leaves your device.",
 		image: uplatkoImg,
 		github: "https://github.com/MarioZitko/uplatko",
-		demo: "https://uplatko.vercel.app",
+		demo: "https://uplatko.com",
 		technologies: ["React", "TypeScript", "Tailwind CSS", "PDF.js", "pdf-lib"],
 		category: "Full-Stack Development",
 	},
