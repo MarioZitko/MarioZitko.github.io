@@ -24,11 +24,18 @@ const projects: Project[] = [
 	{
 		title: "Uplatko",
 		description:
-			"A browser-based tool for Croatian freelancers and small businesses that reads PDF invoices, extracts payment data, and generates HUB3/PDF417 barcodes. Can input AI Api key for more precise processing. All processing runs locally — no data ever leaves your device.",
+			"Browser-based fintech tool for Croatian freelancers — parses PDF invoices and UBL 2.1 XML e-invoices (Fiskalizacija 2.0), extracts payment data, and generates HUB-3/PDF417 barcodes embeddable directly into PDFs. Optional AI parsing via Gemini/Groq API. Zero backend — all processing runs locally in the browser.",
 		image: uplatkoImg,
 		github: "https://github.com/MarioZitko/uplatko",
 		demo: "https://uplatko.com",
-		technologies: ["React", "TypeScript", "Tailwind CSS", "PDF.js", "pdf-lib"],
+		technologies: [
+			"React",
+			"TypeScript",
+			"Tailwind CSS",
+			"PDF.js",
+			"pdf-lib",
+			"bwip-js",
+		],
 		category: "Full-Stack Development",
 	},
 	{
