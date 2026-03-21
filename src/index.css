@@ -128,7 +128,8 @@ html {
 }
 
 body {
-	/* Extend content into safe areas so no white strip appears on iPhone */
+	/* Override the white --background CSS variable — Safari reads body bg for its chrome colour */
+	background-color: #050508 !important;
 	padding-bottom: env(safe-area-inset-bottom);
 }
 
