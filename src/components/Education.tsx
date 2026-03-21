@@ -1,29 +1,48 @@
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import graduation from "../assets/graduation.jpg";
-import graduation2 from "../assets/graduation2.jpg";
 
-const educationData = [
+interface EducationEntry {
+	degree: string;
+	field: string;
+	institution: string;
+	period: string;
+	grade: string;
+	highlights: string[];
+	skills?: string[];
+}
+
+const educationData: EducationEntry[] = [
 	{
-		title: "Master of Engineering",
-		subtitle: "Information Security and Digital Forensics",
+		degree: "Master's Degree",
+		field: "Information Security & Digital Forensics",
 		institution: "Zagreb University of Applied Sciences",
-		year: "2022 – 2024 · GPA: 4.6",
-		image: graduation2,
+		period: "Sep 2022 – Jul 2024",
+		grade: "GPA: 4.6",
+		highlights: [
+			"Specialised in web application security, network security, and digital forensics",
+			"Completed the CISCO Network Security course as part of the curriculum",
+			"Covered advanced topics including malware analysis, incident response, and forensic investigation",
+		],
+		skills: ["Web App Security", "Digital Forensics", "OWASP ZAP", "Splunk", "Network Security", "Information Security"],
 	},
 	{
-		title: "Bachelor of IT Engineering",
-		subtitle: "",
+		degree: "Bachelor's Degree",
+		field: "Information Technology",
 		institution: "Zagreb University of Applied Sciences",
-		year: "2019 – 2022 · GPA: 4.5",
-		image: graduation,
+		period: "Oct 2019 – Jul 2022",
+		grade: "Excellent",
+		highlights: [
+			"Graduated with an excellent grade, completing an undergraduate thesis building a game in Unity using C#",
+			"Competed in the TVZ MC2 competition, developing an Android app in Kotlin as part of a two-person team",
+			"Collaborated in a team of four to design and build a second Unity game project during studies",
+		],
+		skills: ["C#", "Unity", "Game Development", "Frontend Development", "Web Design", "3D Modeling"],
 	},
 ];
 
 const containerVariants = {
 	hidden: {},
 	visible: {
-		transition: { staggerChildren: 0.15 },
+		transition: { staggerChildren: 0.18 },
 	},
 };
 
@@ -49,7 +68,7 @@ export default function Education() {
 			</motion.div>
 
 			<motion.div
-				className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto"
+				className="flex flex-col gap-6 max-w-3xl mx-auto"
 				variants={containerVariants}
 				initial="hidden"
 				whileInView="visible"
@@ -59,30 +78,42 @@ export default function Education() {
 					<motion.div
 						key={index}
 						variants={cardVariants}
-						whileHover={{ y: -6, transition: { duration: 0.2 } }}
+						whileHover={{ y: -4, transition: { duration: 0.2 } }}
+						className="bg-white/5 backdrop-blur-sm border border-zinc-800/50 hover:border-indigo-500/30 transition-colors duration-300 rounded-xl p-6"
 					>
-						<Card className="overflow-hidden h-full bg-white/5 backdrop-blur-sm border-zinc-800/50 hover:border-indigo-500/30 transition-colors duration-300">
-							<div className="relative h-56 w-full overflow-hidden">
-								<img
-									src={edu.image}
-									alt={edu.title}
-									className="w-full h-full object-cover p-2 rounded-t-md transition-transform duration-500 hover:scale-105"
-									loading="lazy"
-								/>
+						<div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-3">
+							<div>
+								<h3 className="text-base font-semibold text-zinc-200">{edu.degree}</h3>
+								<p className="text-sm text-indigo-300/80 mt-0.5">{edu.field}</p>
+								<p className="text-sm text-zinc-400 mt-0.5">{edu.institution}</p>
 							</div>
-							<CardHeader className="pb-2">
-								<CardTitle className="text-lg text-zinc-200">
-									{edu.title}
-								</CardTitle>
-							</CardHeader>
-							<CardContent>
-								{edu.subtitle && (
-									<p className="text-sm text-indigo-300/80 mb-1">{edu.subtitle}</p>
-								)}
-								<p className="text-sm text-zinc-400">{edu.institution}</p>
-								<p className="text-sm text-zinc-500 mt-1">{edu.year}</p>
-							</CardContent>
-						</Card>
+							<div className="text-right shrink-0">
+								<span className="text-xs text-zinc-500">{edu.period}</span>
+								<p className="text-xs text-zinc-400 mt-0.5">{edu.grade}</p>
+							</div>
+						</div>
+
+						<ul className="space-y-1.5 mb-4">
+							{edu.highlights.map((point, i) => (
+								<li key={i} className="flex gap-2 text-sm text-zinc-400 leading-relaxed">
+									<span className="text-indigo-400 shrink-0 leading-relaxed">›</span>
+									<span>{point}</span>
+								</li>
+							))}
+						</ul>
+
+						{edu.skills && (
+							<div className="flex flex-wrap gap-1.5">
+								{edu.skills.map((skill, i) => (
+									<span
+										key={i}
+										className="text-xs px-2 py-0.5 bg-indigo-950/50 border border-indigo-500/20 rounded text-indigo-300/80"
+									>
+										{skill}
+									</span>
+								))}
+							</div>
+						)}
 					</motion.div>
 				))}
 			</motion.div>
