@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import vekomImg from "../assets/projects/vekom.png";
 import uplatkoImg from "../assets/projects/uplatko.png";
+import kolikoPlacamImg from "../assets/projects/koliko-placam.png";
 import liftforgeImg from "../assets/projects/liftforge.png";
 import securityImg from "../assets/projects/securityTest.png";
 import portfolioImage from "../assets/portfolio.png";
@@ -37,6 +38,22 @@ const projects: Project[] = [
 			"bwip-js",
 		],
 		category: "Full-Stack Development",
+	},
+	{
+		title: "Koliko Plaćam",
+		description:
+			"Interactive calculator for Croatian residents to estimate annual komunalna naknada and waste collection costs across 24 cities. Features an interactive Leaflet map for city selection, zone-based cost breakdowns, and a sortable city comparison table — all computed client-side with no backend. Data sourced from official JLS decisions and public records.",
+		image: kolikoPlacamImg,
+		github: "https://github.com/MarioZitko/koliko-placam",
+		demo: "https://koliko-placam.vercel.app",
+		technologies: [
+			"React",
+			"TypeScript",
+			"Tailwind CSS",
+			"Leaflet",
+			"react-leaflet",
+		],
+		category: "Frontend Development",
 	},
 	{
 		title: "LiftForge",
