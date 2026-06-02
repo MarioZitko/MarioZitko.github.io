@@ -22,7 +22,7 @@ const experiences: ExperienceEntry[] = [
 	{
 		company: "KONČAR – Electrical Engineering Institute",
 		context:
-			"R&D institute within the KONČAR Group — one of Croatia's largest industrial conglomerates — developing specialised software for power engineering, high-voltage electrical testing, and energy systems.",
+			"R&D institute within the KONČAR Group — developing specialised software for power engineering, high-voltage electrical testing, and energy systems.",
 		location: "Zagreb, Croatia · Hybrid",
 		totalDuration: "2 yrs · Ongoing",
 		roles: [
@@ -87,7 +87,8 @@ const experiences: ExperienceEntry[] = [
 	},
 	{
 		company: "HGSPOT",
-		context: "Consumer electronics and IT retail chain, held alongside full-time university studies.",
+		context:
+			"Consumer electronics and IT retail chain, held alongside full-time university studies.",
 		location: "Zagreb, Croatia",
 		totalDuration: "2 yrs 4 mos",
 		roles: [
@@ -173,7 +174,9 @@ export default function Experience(): JSX.Element {
 									</span>
 								</div>
 								<p className="text-sm text-gray-500 mt-0.5">{entry.location}</p>
-							<p className="text-sm text-gray-500 mt-2 leading-relaxed">{entry.context}</p>
+								<p className="text-sm text-gray-500 mt-2 leading-relaxed">
+									{entry.context}
+								</p>
 							</div>
 
 							{/* Roles */}

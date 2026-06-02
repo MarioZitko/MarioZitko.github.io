@@ -5,6 +5,7 @@ import uplatkoImg from "../assets/projects/uplatko.png";
 import kolikoPlacamImg from "../assets/projects/koliko-placam.png";
 import liftforgeImg from "../assets/projects/liftforge.png";
 import securityImg from "../assets/projects/securityTest.png";
+import sunProfitImg from "../assets/projects/sunProfit.png";
 import portfolioImage from "../assets/portfolio.png";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { JSX } from "react";
@@ -22,6 +23,23 @@ interface Project {
 }
 
 const projects: Project[] = [
+	{
+		title: "Sun Profit",
+		description:
+			"Solar panel ROI simulator for Croatian homeowners — calculates 25-year financial model using real PVGIS sun data, Croatia's 2026 net billing model, and battery storage options. Interactive map, tilt angle controls, and break-even projections. Zero backend — all processing runs in the browser.",
+		image: sunProfitImg,
+		github: "https://github.com/MarioZitko/suncani-profit",
+		demo: "https://suncani-profit.vercel.app/",
+		technologies: [
+			"React",
+			"TypeScript",
+			"Tailwind CSS",
+			"Leaflet",
+			"PVGIS API",
+			"Vercel",
+		],
+		category: "Frontend Development",
+	},
 	{
 		title: "Uplatko",
 		description:
