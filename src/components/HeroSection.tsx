@@ -122,8 +122,9 @@ export default function HeroSection(): JSX.Element {
 					variants={itemVariants}
 					className="max-w-xl text-base md:text-lg mb-10 text-gray-400 leading-relaxed"
 				>
-					Passionate about building efficient, scalable solutions. Specialised
-					in full-stack development and leading high-quality engineering teams.
+					I lead a team of 6 to 8 developers building the systems that test and
+					certify high-voltage transformers before they ship. Full-stack, React
+					and .NET, with a background in application security.
 				</motion.p>
 
 				{/* CTA Buttons */}

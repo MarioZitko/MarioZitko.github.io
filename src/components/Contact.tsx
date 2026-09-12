@@ -8,11 +8,32 @@ const SERVICE_ID = "service_4db2quh";
 const TEMPLATE_ID = "template_pjg7whg";
 const PUBLIC_KEY = "XR4RsEB5-71Y2K2Ex";
 
-type Status = "idle" | "sending" | "success" | "error";
+const LINKEDIN_URL = "https://www.linkedin.com/in/mariozitkovic/";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MESSAGE_MAX_LENGTH = 5000;
+
+// "invalid" is something the visitor can fix; "error" is the service failing
+type Status = "idle" | "sending" | "success" | "invalid" | "error";
+
+function validate(form: HTMLFormElement): string | null {
+	const data = new FormData(form);
+	const name = String(data.get("from_name") ?? "").trim();
+	const email = String(data.get("from_email") ?? "").trim();
+	const message = String(data.get("message") ?? "").trim();
+
+	if (!name || !email || !message) {
+		return "Please fill in your name, email and message.";
+	}
+	if (!EMAIL_PATTERN.test(email)) {
+		return "That email address doesn't look right. Please check it.";
+	}
+	return null;
+}
 
 export default function Contact(): JSX.Element {
 	const formRef = useRef<HTMLFormElement>(null);
 	const [status, setStatus] = useState<Status>("idle");
+	const [validationError, setValidationError] = useState<string | null>(null);
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -23,14 +44,28 @@ export default function Contact(): JSX.Element {
 			?.value;
 		if (honeypot) return;
 
+		const error = validate(form);
+		if (error) {
+			setValidationError(error);
+			setStatus("invalid");
+			return;
+		}
+
 		setStatus("sending");
 		try {
 			await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY);
 			setStatus("success");
 			form.reset();
-		} catch {
+		} catch (err) {
+			// Input is validated above, so any rejection here is on the service side
+			// (EmailJS rejects with { status, text }, e.g. 412 when the Gmail link expires)
+			console.error("Contact form: EmailJS send failed", err);
 			setStatus("error");
 		}
+	}
+
+	function handleChange() {
+		if (status === "invalid") setStatus("idle");
 	}
 
 	const inputClass =
@@ -51,7 +86,12 @@ export default function Contact(): JSX.Element {
 				Have a project in mind or just want to say hi? I'll get back to you.
 			</p>
 
-			<form ref={formRef} onSubmit={handleSubmit} noValidate>
+			<form
+				ref={formRef}
+				onSubmit={handleSubmit}
+				onChange={handleChange}
+				noValidate
+			>
 				{/* Honeypot — hidden from real users */}
 				<input
 					type="text"
@@ -59,6 +99,7 @@ export default function Contact(): JSX.Element {
 					className="hidden"
 					tabIndex={-1}
 					autoComplete="off"
+					aria-hidden="true"
 				/>
 
 				<div className="flex flex-col gap-4">
@@ -81,6 +122,7 @@ export default function Contact(): JSX.Element {
 						placeholder="Your message"
 						rows={5}
 						required
+						maxLength={MESSAGE_MAX_LENGTH}
 						className={`${inputClass} resize-none`}
 					/>
 				</div>
@@ -88,6 +130,7 @@ export default function Contact(): JSX.Element {
 				<button
 					type="submit"
 					disabled={status === "sending" || status === "success"}
+					aria-busy={status === "sending"}
 					className="mt-4 w-full py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors duration-200"
 				>
 					{status === "sending"
@@ -97,9 +140,24 @@ export default function Contact(): JSX.Element {
 							: "Send Message"}
 				</button>
 
+				{status === "invalid" && (
+					<p role="alert" className="mt-3 text-center text-sm text-amber-400">
+						{validationError}
+					</p>
+				)}
+
 				{status === "error" && (
-					<p className="mt-3 text-center text-sm text-red-400">
-						Something went wrong — try emailing me directly.
+					<p role="alert" className="mt-3 text-center text-sm text-red-400">
+						The message couldn't be sent right now. Please reach me on{" "}
+						<a
+							href={LINKEDIN_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline underline-offset-2 hover:text-red-300"
+						>
+							LinkedIn
+						</a>{" "}
+						instead.
 					</p>
 				)}
 			</form>
@@ -116,7 +174,7 @@ export default function Contact(): JSX.Element {
 					<span className="text-sm">GitHub</span>
 				</a>
 				<a
-					href="https://www.linkedin.com/in/mariozitkovic/"
+					href={LINKEDIN_URL}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"

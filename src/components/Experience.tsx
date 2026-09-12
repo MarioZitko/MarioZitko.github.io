@@ -7,6 +7,7 @@ interface Role {
 	type: string;
 	bullets?: string[];
 	description?: string;
+	technologies?: string[];
 }
 
 interface ExperienceEntry {
@@ -24,16 +25,27 @@ const experiences: ExperienceEntry[] = [
 		context:
 			"R&D institute within the KONČAR Group — developing specialised software for power engineering, high-voltage electrical testing, and energy systems.",
 		location: "Zagreb, Croatia · Hybrid",
-		totalDuration: "2 yrs · Ongoing",
+		totalDuration: "2 yrs 6 mos · Ongoing",
 		roles: [
 			{
 				title: "Software Engineer | Tech Lead",
 				period: "Jan 2026 – Present",
 				type: "Full-time",
 				bullets: [
-					"Stepped into a Tech Lead role across multiple parallel projects — directly mentoring and unblocking developers, conducting deep code reviews, and raising the team's architectural standards",
-					"Partnering with the Team Lead on feature design, sprint planning, and technical roadmaps to keep engineering aligned with business and client goals",
-					"Owning the full merge request pipeline: enforcing code quality standards, catching regressions early, and maintaining a clean, well-documented codebase across 6 active projects",
+					"Lead a team of 6 to 8 developers across multiple parallel enterprise applications built with React, TypeScript, ASP.NET Core, EF Core and SQL Server",
+					"Own technical direction across all active projects, from architecture and client requirements through to delivery and production support",
+					"Set up GitLab CI/CD pipelines with self-hosted runners and provision the infrastructure they deploy to, including IIS on bare Windows Server and nginx",
+					"Work with the business analyst and business lead on feature design, technical roadmaps and sprint planning, including assessing what the team can realistically deliver in a given timeframe",
+					"Own code quality through merge request review, architectural review and team-wide standards",
+				],
+				technologies: [
+					"React.js",
+					"TypeScript",
+					"ASP.NET Core",
+					"GitLab CI/CD",
+					"IIS",
+					"nginx",
+					"MSSQL",
 				],
 			},
 			{
@@ -41,7 +53,7 @@ const experiences: ExperienceEntry[] = [
 				period: "May 2024 – Jan 2026",
 				type: "Full-time",
 				bullets: [
-					"Delivered 6 enterprise applications across multiple clients, owning the complete lifecycle — from architecture discussions and direct client communication to production deployment on IIS",
+					"Delivered enterprise applications across multiple clients, owning the complete lifecycle — from architecture discussions and direct client communication to production deployment on IIS. Set up two of these projects from scratch, owning the initial architecture.",
 					"Engineered complex React components featuring real-time transformer test calculations (load loss, short-circuit, efficiency) used daily by test engineers in KONČAR's live high-voltage testing labs",
 					"Built an automated reporting pipeline generating formal PDF and Excel test reports with custom branding, embedded measurement graphs, and structured data — eliminating previously manual, error-prone workflows and delivering polished results directly to clients",
 					"Mentored junior developers within a Scrum team, improving code quality and sprint velocity across all active projects",
@@ -103,6 +115,9 @@ const experiences: ExperienceEntry[] = [
 		technologies: ["Communication", "Customer Support", "Teamwork"],
 	},
 ];
+
+const techTagClassName =
+	"text-xs px-2.5 py-1 rounded-md bg-indigo-950/50 border border-indigo-500/20 text-indigo-300/80 hover:border-indigo-400/40 hover:text-indigo-200 transition-colors duration-200";
 
 const containerVariants = {
 	hidden: {},
@@ -214,6 +229,16 @@ export default function Experience(): JSX.Element {
 												{role.description}
 											</p>
 										)}
+
+										{role.technologies && (
+											<div className="flex flex-wrap gap-1.5 mt-3 ml-1">
+												{role.technologies.map((tech, k) => (
+													<span key={k} className={techTagClassName}>
+														{tech}
+													</span>
+												))}
+											</div>
+										)}
 									</div>
 								))}
 							</div>
@@ -221,10 +246,7 @@ export default function Experience(): JSX.Element {
 							{/* Tech tags */}
 							<div className="flex flex-wrap gap-1.5 mt-5">
 								{entry.technologies.map((tech, k) => (
-									<span
-										key={k}
-										className="text-xs px-2.5 py-1 rounded-md bg-indigo-950/50 border border-indigo-500/20 text-indigo-300/80 hover:border-indigo-400/40 hover:text-indigo-200 transition-colors duration-200"
-									>
+									<span key={k} className={techTagClassName}>
 										{tech}
 									</span>
 								))}
